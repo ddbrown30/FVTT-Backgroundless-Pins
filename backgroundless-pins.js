@@ -45,25 +45,23 @@ export class BackgroundlessControlIcon extends ControlIcon {
      * Override ControlIcon#draw to remove drawing of the background.
      */
     async draw() {
-        // Load the icon texture
-        this.texture = this.texture ?? (await loadTexture(this.iconSrc));
-
         // Don't draw a destroyed Control
         if (this.destroyed) return this;
 
-        // Draw border
-        this.border
-            .clear()
-            .lineStyle(2, this.borderColor, 1.0)
-            .drawRoundedRect(...this.rect, 5)
-            .endFill();
-        this.border.visible = false;
+        // Load the icon texture
+        this.texture = this.texture ?? await loadTexture(this.iconSrc);
 
-        // Draw icon
+        // Set the icon texture
         this.icon.texture = this.texture;
+
+        // Set the icon width and height
         this.icon.width = this.icon.height = this.size;
-        this.icon.tint = Number.isNumeric(this.tintColor) ? this.tintColor : 0xffffff;
-        return this;
+
+        // Hide the background
+        this.bg.visible = false;
+
+        // Refresh
+        return this.refresh();
     }
 }
 
