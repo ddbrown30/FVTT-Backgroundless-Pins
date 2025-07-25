@@ -3,8 +3,8 @@
 	"title": "Backgroundless Pins",
 	"description": "Removes the background from map notes",
 	"compatibility": {
-	  "minimum": "12",
-	  "verified": "12.331"
+	  "minimum": "13",
+	  "verified": "13.344"
 	},
 	"version": "0.0.0",
 	"esmodules": [
