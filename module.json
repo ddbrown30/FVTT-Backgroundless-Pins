@@ -4,7 +4,7 @@
 	"description": "Removes the background from map notes",
 	"compatibility": {
 	  "minimum": "13",
-	  "verified": "13.344"
+	  "verified": "13.347"
 	},
 	"version": "0.0.0",
 	"esmodules": [
