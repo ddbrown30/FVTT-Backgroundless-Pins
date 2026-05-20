@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 3.0.0
+
+* Fixed v14 compatibility
+
 ## 2.0.0
 
 * Fixed v12 compatibility
