@@ -51,7 +51,7 @@ export class BackgroundlessControlIcon extends foundry.canvas.containers.Control
         if (this.destroyed) return this;
 
         // Load the icon texture
-        this.texture = this.texture ?? await foundry.canvas.loadTexture(this.iconSrc);
+        this.texture = await foundry.canvas.loadTexture(this.texture);
 
         // Set the icon texture
         this.icon.texture = this.texture;
