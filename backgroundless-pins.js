@@ -44,9 +44,9 @@ Hooks.on("closeNoteConfig", (noteConfig) => {
 
 export class BackgroundlessControlIcon extends foundry.canvas.containers.ControlIcon {
     /**
-     * Override ControlIcon#draw to remove drawing of the background.
+     * Override ControlIcon#_draw to remove drawing of the background.
      */
-    async draw() {
+    async _draw() {
         // Don't draw a destroyed Control
         if (this.destroyed) return this;
 
@@ -61,8 +61,6 @@ export class BackgroundlessControlIcon extends foundry.canvas.containers.Control
 
         // Hide the background
         this.bg.visible = false;
-
-        // Refresh
-        return this.refresh();
+        this.border.visible = false;
     }
 }
