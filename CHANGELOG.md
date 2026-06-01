@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 4.0.1
+
+* Fixed notes being clickable
+
 ## 4.0.0
 
 * Fixed v14 compatibility
