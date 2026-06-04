@@ -6,19 +6,20 @@ Hooks.on("init", () => {
             size: this.document.iconSize,
             tint: Color.from(this.document.texture.tint || null)
         };
-        const hasBackground = this.document.getFlag(
-            "backgroundless-pins",
-            "hasBackground"
-        );
-        const IconClass = hasBackground
-            ? foundry.canvas.containers.ControlIcon
-            : BackgroundlessControlIcon;
-        const icon = new IconClass(iconData);
-        const halfIconSize = this.document.iconSize / 2;
-        icon.x -= halfIconSize;
-        icon.y -=halfIconSize;
+        const icon = new foundry.canvas.containers.ControlIcon(iconData);
+
+        const hasBackground = this.document.getFlag("backgroundless-pins", "hasBackground");
+        icon.bg.alpha = hasBackground ? 0.4 : 0;
+        icon.border.alpha = hasBackground ? 1 : 0;
         return icon;
     };
+});
+
+Hooks.on("hoverNote", (note, hover) => {
+    const hasBackground = note.document.getFlag("backgroundless-pins", "hasBackground");
+    if (!hasBackground) {
+        note.controlIcon.border.alpha = hover ? 1 : 0;
+    }
 });
 
 Hooks.on("renderNoteConfig", (noteConfig, html, data, options) => {
@@ -41,26 +42,3 @@ Hooks.on("closeNoteConfig", (noteConfig) => {
     //There seems to be no way to trigger the draw as part of changing the hasBackground value so we just do it here every time
     noteConfig.document.object.draw({force: true});
 });
-
-export class BackgroundlessControlIcon extends foundry.canvas.containers.ControlIcon {
-    /**
-     * Override ControlIcon#_draw to remove drawing of the background.
-     */
-    async _draw() {
-        // Don't draw a destroyed Control
-        if (this.destroyed) return this;
-
-        // Load the icon texture
-        this.texture = await foundry.canvas.loadTexture(this.texture);
-
-        // Set the icon texture
-        this.icon.texture = this.texture;
-
-        // Set the icon width and height
-        this.icon.width = this.icon.height = this.size;
-
-        // Hide the background
-        this.bg.visible = false;
-        this.border.visible = false;
-    }
-}
