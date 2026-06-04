@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 4.0.2
+
+* Completely refactored the logic to better support v14
+
 ## 4.0.1
 
 * Fixed notes being clickable
